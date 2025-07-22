@@ -1,10 +1,11 @@
 /* Styles for the container element */
 .container {
-    max-width: 900px; /* Set maximum width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 40px; /* Add padding inside the container */
-    margin-top: 10%; /* Set top margin as a percentage of the viewport height */
-    overflow: hidden; /* Hide any overflowing content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
 }
 
 /* Styles for the password visibility icon */
@@ -114,4 +115,9 @@
 .btn-danger {
     background-color: #dc3545; /* Set background color for danger button */
     color: #fff; /* Set text color for danger button */
+}
+
+.error-text {
+  color: red;
+  font-size: 0.8em;
 }
