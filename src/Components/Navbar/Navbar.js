@@ -1,10 +1,11 @@
 import React from 'react';
 import './Navbar.css'; 
-import { FaBars, FaTimes } from 'react-icons/fa'; 
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // ✅ Import React Router Link
 
 const Navbar = () => {
   const handleClick = () => {
-    // You can implement toggle logic here
+    // Optional: implement mobile nav toggle logic here
     console.log("Icon clicked");
   };
 
@@ -12,8 +13,7 @@ const Navbar = () => {
     <nav>
       {/* Navigation logo section */}
       <div className="nav__logo">
-        {/* Link to the home page */}
-        <a href="/">
+        <Link to="/">
           StayHealthy
           {/* SVG icon of a doctor with a stethoscope */}
           <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{ fill: '#3685fb' }}>
@@ -26,33 +26,32 @@ const Navbar = () => {
               </g>
             </g>
           </svg>
-        </a>
+        </Link>
         <span>.</span>
       </div>
 
-      {/* Navigation icon with onClick event */}
+      {/* Navigation icon */}
       <div className="nav__icon" onClick={handleClick}>
-        {/* Replace with React Icons or keep Font Awesome if you're loading it */}
         <i className="fa fa-bars"></i>
       </div>
 
       {/* Navigation links */}
       <ul className="nav__links active">
         <li className="link">
-          <a href="../Landing_Page/LandingPage.html">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li className="link">
-          <a href="#">Appointments</a>
+          <a href="#">Appointments</a> {/* You can update this with <Link to="/appointments"> later */}
         </li>
         <li className="link">
-          <a href="../Sign_Up/Sign_Up.html">
+          <Link to="/signup">
             <button className="btn1">Sign Up</button>
-          </a>
+          </Link>
         </li>
         <li className="link">
-          <a href="../Login/Login.html">
+          <Link to="/login">
             <button className="btn1">Login</button>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
