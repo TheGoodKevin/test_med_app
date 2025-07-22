@@ -1,58 +1,101 @@
-import React from 'react';
-import './Navbar.css'; 
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // ✅ Import React Router Link
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import "./Navbar.css";
+
+
 
 const Navbar = () => {
-  const handleClick = () => {
-    // Optional: implement mobile nav toggle logic here
-    console.log("Icon clicked");
-  };
+    const [click, setClick] = useState(false);
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState("");
+    const[email,setEmail]=useState("");
+    const [showDropdown, setShowDropdown] = useState(false);
+    const handleClick = () => setClick(!click);
+
+    
+    const handleLogout = () => {
+        sessionStorage.removeItem("auth-token");
+        sessionStorage.removeItem("name");
+        sessionStorage.removeItem("email");
+        sessionStorage.removeItem("phone");
+        // remove email phone
+        localStorage.removeItem("doctorData");
+        setIsLoggedIn(false);
+        // setUsername("");
+       
+        // Remove the reviewFormData from local storage
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith("reviewFormData_")) {
+            localStorage.removeItem(key);
+          }
+        }
+        setEmail('');
+        window.location.reload();
+    }
+    const handleDropdown = () => {
+      setShowDropdown(!showDropdown);
+    }
+    useEffect(() => { 
+      const storedemail = sessionStorage.getItem("email");
+
+      if (storedemail) {
+            setIsLoggedIn(true);
+            setUsername(storedemail);
+          }
+        }, []);
   return (
     <nav>
-      {/* Navigation logo section */}
       <div className="nav__logo">
         <Link to="/">
-          StayHealthy
-          {/* SVG icon of a doctor with a stethoscope */}
-          <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{ fill: '#3685fb' }}>
-            <title>Doctor With Stethoscope SVG icon</title>
-            <g>
-              <g>
-                <path d="M499.8,10c91.7,0,166,74.3,166,166c0,91.7-74.3,166-166,166c-91.7,0-166-74.3-166-166C333.8,84.3,408.1,10,499.8,10z"></path>
-                <path d="M499.8,522.8c71.2,0,129.1-58.7,129.1-129.1H370.6C370.6,464.1,428.6,522.8,499.8,522.8z"></path>
-                <path d="M693.2,395c-0.7,94.9-70.3,173.7-160.8,188.9v155.9c0,80.3-60.7,150.8-140.8,155.3..."></path>
-              </g>
-            </g>
-          </svg>
-        </Link>
+        StayHealthy <i style={{color:'#2190FF'}} className="fa fa-user-md"></i></Link>
         <span>.</span>
       </div>
-
-      {/* Navigation icon */}
       <div className="nav__icon" onClick={handleClick}>
-        <i className="fa fa-bars"></i>
+        <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
       </div>
-
-      {/* Navigation links */}
-      <ul className="nav__links active">
+      <ul className={click ? 'nav__links active' : 'nav__links'}>
         <li className="link">
           <Link to="/">Home</Link>
         </li>
         <li className="link">
-          <a href="#">Appointments</a> {/* You can update this with <Link to="/appointments"> later */}
+          <Link to="/search/doctors">Appointments</Link>
         </li>
         <li className="link">
-          <Link to="/signup">
-            <button className="btn1">Sign Up</button>
-          </Link>
+          <Link to="/healthblog">Health Blog</Link>
         </li>
         <li className="link">
-          <Link to="/login">
-            <button className="btn1">Login</button>
-          </Link>
+         <Link to="/reviews">Reviews</Link>
         </li>
+        {isLoggedIn ? (
+        <>
+            <li className="link">
+            <span style={{ marginRight: '10px', fontWeight: '500' }}>
+                Welcome, {username.split('@')[0]}
+            </span>
+            </li>
+            <li className="link">
+            <button className="btn2" onClick={handleLogout}>
+                Logout
+            </button>
+            </li>
+        </>
+        ) : (
+        <>
+            <li className="link">
+            <Link to="/signup">
+                <button className="btn1">Sign Up</button>
+            </Link>
+            </li>
+            <li className="link">
+            <Link to="/login">
+                <button className="btn1">Login</button>
+            </Link>
+            </li>
+        </>
+        )}
       </ul>
     </nav>
   );
