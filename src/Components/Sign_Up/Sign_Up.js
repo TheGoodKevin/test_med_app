@@ -8,7 +8,7 @@ const Sign_Up = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [showerr, setShowerr] = useState('');
+    const [showerr, setShowerr] = useState([]); // ✅ changed to array
     const navigate = useNavigate();
 
     const register = async (e) => {
@@ -38,9 +38,9 @@ const Sign_Up = () => {
             window.location.reload();
         } else {
             if (json.errors) {
-                setShowerr(json.errors.map(err => err.msg).join(", "));
+                setShowerr(json.errors.map(err => err.msg)); // ✅ store array of messages
             } else {
-                setShowerr(json.error);
+                setShowerr([json.error]); // ✅ wrap single error in array
             }
         }
     };
@@ -50,7 +50,7 @@ const Sign_Up = () => {
         setEmail('');
         setPhone('');
         setPassword('');
-        setShowerr('');
+        setShowerr([]); // ✅ reset error messages
     };
 
     return (
@@ -102,7 +102,13 @@ const Sign_Up = () => {
                                 placeholder="Enter your email"
                                 aria-describedby="helpId"
                             />
-                            {showerr && <div className="err" style={{ color: 'red' }}>{showerr}</div>}
+                            {showerr.length > 0 && (
+                                <div className="err" style={{ color: 'red' }}>
+                                    {showerr.map((msg, idx) => (
+                                        <div key={idx}>{msg}</div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <div className="form-group">
