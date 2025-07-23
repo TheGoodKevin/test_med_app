@@ -1,103 +1,116 @@
-import React, { useState } from 'react';
-import './Login.css';
+import React, { useState, useEffect } from 'react';
+import './Login.css'; // Optional: make sure this CSS exists or remove this line
+import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../config';
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  // State variables for email and password
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
 
-  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const validate = () => {
-    let temp = {};
-
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      temp.email = 'Enter a valid email address';
+  // Redirect if already logged in
+  useEffect(() => {
+    if (sessionStorage.getItem("auth-token")) {
+      navigate("/");
     }
+  }, []);
 
-    if (!formData.password) {
-      temp.password = 'Password is required';
-    }
-
-    setErrors(temp);
-    return Object.keys(temp).length === 0;
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  // Handle login form submission
+  const login = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      alert('Login successful (placeholder)');
-      // Add your actual login logic here
+
+    const res = await fetch(`${API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    const json = await res.json();
+
+    if (json.authtoken) {
+      // Save session data
+      sessionStorage.setItem('auth-token', json.authtoken);
+      sessionStorage.setItem('email', email);
+
+      // Redirect and reload
+      navigate('/');
+      window.location.reload();
+    } else {
+      if (json.errors) {
+        for (const error of json.errors) {
+          alert(error.msg);
+        }
+      } else {
+        alert(json.error);
+      }
     }
   };
 
   return (
-    <div className="container">
-      <div className="login-grid">
-        <div className="login-text">
-          <h2>Login</h2>
-        </div>
-        <div className="login-text">
-          Are you a new member?{' '}
-          <span>
-            <a href="/signup" style={{ color: '#2190FF' }}>
-              Sign Up Here
-            </a>
-          </span>
-        </div>
-        <br />
-        <div className="login-form">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="form-control"
-                placeholder="Enter your email"
-                onChange={handleChange}
-              />
-              <span className="error-text">{errors.email}</span>
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="form-control"
-                placeholder="Enter your password"
-                onChange={handleChange}
-              />
-              <span className="error-text">{errors.password}</span>
-            </div>
-            <div className="btn-group">
-              <button
-                type="submit"
-                className="btn btn-primary mb-2 mr-1 waves-effect waves-light"
-              >
-                Login
-              </button>
-              <button
-                type="reset"
-                className="btn btn-danger mb-2 waves-effect waves-light"
-                onClick={() => {
-                  setFormData({ email: '', password: '' });
-                  setErrors({});
-                }}
-              >
-                Reset
-              </button>
-            </div>
-            <br />
-            <div className="login-text">Forgot Password?</div>
-          </form>
+    <div>
+      <div className="container">
+        <div className="login-grid">
+          <div className="login-text">
+            <h2>Login</h2>
+          </div>
+          <div className="login-text">
+            Are you a new member?{" "}
+            <span>
+              <Link to="/signup" style={{ color: '#2190FF' }}>
+                Sign Up Here
+              </Link>
+            </span>
+          </div>
+          <br />
+          <div className="login-form">
+            <form onSubmit={login}>
+              {/* Email input */}
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="form-control"
+                  placeholder="Enter your email"
+                  aria-describedby="helpId"
+                />
+              </div>
+
+              {/* Password input */}
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="form-control"
+                  placeholder="Enter your password"
+                  aria-describedby="helpId"
+                />
+              </div>
+
+              <div className="btn-group">
+                <button
+                  type="submit"
+                  className="btn btn-primary mb-2 mr-1 waves-effect waves-light"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
