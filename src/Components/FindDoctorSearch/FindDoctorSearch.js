@@ -33,7 +33,7 @@ const FindDoctorSearch = () => {
           onChange={(e) => setSearchInput(e.target.value)}
         />
         <div className="search-icon">
-          <img src={process.env.PUBLIC_URL + '/images/search.svg'} alt="search" />
+          <img src={process.env.PUBLIC_URL + '/searchhh.svg'} alt="search" />
         </div>
         {showSuggestions && (
           <div className="suggestions">

@@ -53,14 +53,13 @@
 
 .suggestions {
   position: absolute;
-  top: 45px;
-  width: 400px;
-  background-color: #fff;
-  border: 1px solid #555;
-  z-index: 10;
-  max-height: 300px;
-  overflow-y: auto;
-  border-radius: 0 0 5px 5px;
+  top: 300px; /* push it below the search bar */
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: white;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .suggestion-item {
