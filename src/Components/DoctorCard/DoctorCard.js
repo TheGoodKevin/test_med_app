@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './DoctorCard.css';
 import AppointmentForm from '../AppointmentForm/AppointmentForm';
 
-const DoctorCard = ({ name, specialty, experience, rating, image }) => {
+const DoctorCard = ({ name, speciality, experience, rating, image }) => {
   const [showForm, setShowForm] = useState(false);
 
   const handleAppointmentSubmit = (formData) => {
@@ -25,7 +25,7 @@ const DoctorCard = ({ name, specialty, experience, rating, image }) => {
         </div>
         <div className="doctor-card-details">
           <div className="doctor-card-detail-name">{name}</div>
-          <div className="doctor-card-detail-specialty">{specialty}</div>
+          <div className="doctor-card-detail-speciality">{speciality}</div>
           <div className="doctor-card-detail-experience">{experience} years experience</div>
           <div className="doctor-card-detail-rating">Ratings: {rating}</div>
         </div>
@@ -40,7 +40,7 @@ const DoctorCard = ({ name, specialty, experience, rating, image }) => {
           <div style={{ marginTop: '20px' }}>
             <AppointmentForm
               doctorName={name}
-              doctorSpeciality={specialty}
+              doctorSpeciality={speciality}
               onSubmit={handleAppointmentSubmit}
             />
           </div>
