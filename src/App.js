@@ -7,6 +7,8 @@ import SignUp from './Components/Sign_Up/Sign_Up';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import DoctorCard from './Components/DoctorCard/DoctorCard';
+import BookingConsultation from './Components/BookingConsultation/BookingConsultation';
+
 
 function App() {
     const dummyDoctors = [
@@ -49,6 +51,7 @@ function App() {
             </div>
             }
         />
+        <Route path="/book-consultation" element={<BookingConsultation />} />
         </Routes>
       </BrowserRouter>
     </div>
