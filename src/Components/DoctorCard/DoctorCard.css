@@ -76,3 +76,41 @@
   border-radius: 8px;
   margin-top: 1rem;
 }
+
+.doctor-card-options-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.doctorbg {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.booked-info p {
+  margin: 5px 0;
+}
+
+.doctor-card-options-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.doctorbg {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.booked-info p {
+  margin: 5px 0;
+}
