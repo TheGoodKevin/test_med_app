@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './InstantConsultation.css'; // Reusing styling
+import '../InstantConsultationBooking/InstantConsultation.css'; // Reusing styling
 import FindDoctorSearch from '../FindDoctorSearch/FindDoctorSearch';
 import DoctorCard from '../DoctorCard/DoctorCard';
 
