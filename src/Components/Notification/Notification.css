@@ -1,0 +1,29 @@
+/* Container for the appointment card */
+.appointment-card {
+  background-color: #5c9cf5;       /* Matches the blue background */
+  color: white;                    /* White text */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 450px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;  /* Clean, readable font */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Title for the notification */
+.appointment-card__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* General text inside the notification */
+.appointment-card__content p {
+  font-size: 16px;
+  margin: 6px 0;
+}
+
+/* Make field labels bold */
+.appointment-card__content strong {
+  font-weight: bold;
+}

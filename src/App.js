@@ -8,6 +8,7 @@ import InstantConsultation from './Components/InstantConsultationBooking/Instant
 import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import DoctorCard from './Components/DoctorCard/DoctorCard';
 import BookingConsultation from './Components/BookingConsultation/BookingConsultation';
+import Notification from './Components/Notification/Notification';
 
 
 function App() {
@@ -34,25 +35,27 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Landing_Page />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/instant-consultation" element={<InstantConsultation />} />
-          <Route path="/find-doctor-search" element={<FindDoctorSearch />} />
-          <Route
-            path="/test-doctor-cards"
-            element={
-            <div style={{ marginTop: '100px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', padding: '2rem' }}>
-                {dummyDoctors.map((doc, idx) => (
-                <DoctorCard key={idx} {...doc} />
-                ))}
-            </div>
-            }
-        />
-        <Route path="/book-consultation" element={<BookingConsultation />} />
-        </Routes>
+        <Notification>
+            <Navbar />
+            <Routes>
+            <Route path="/" element={<Landing_Page />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/instant-consultation" element={<InstantConsultation />} />
+            <Route path="/find-doctor-search" element={<FindDoctorSearch />} />
+            <Route
+                path="/test-doctor-cards"
+                element={
+                <div style={{ marginTop: '100px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', padding: '2rem' }}>
+                    {dummyDoctors.map((doc, idx) => (
+                    <DoctorCard key={idx} {...doc} />
+                    ))}
+                </div>
+                }
+            />
+            <Route path="/book-consultation" element={<BookingConsultation />} />
+            </Routes>
+        </Notification>
       </BrowserRouter>
     </div>
   );
