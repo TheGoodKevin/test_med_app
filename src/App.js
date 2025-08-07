@@ -9,6 +9,7 @@ import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import DoctorCard from './Components/DoctorCard/DoctorCard';
 import BookingConsultation from './Components/BookingConsultation/BookingConsultation';
 import Notification from './Components/Notification/Notification';
+import ReviewForm from './Components/ReviewForm/ReviewForm';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                 }
             />
             <Route path="/book-consultation" element={<BookingConsultation />} />
+            <Route path="/reviews" element={<ReviewForm />} />
             </Routes>
         </Notification>
       </BrowserRouter>
