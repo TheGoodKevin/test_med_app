@@ -10,6 +10,7 @@ import DoctorCard from './Components/DoctorCard/DoctorCard';
 import BookingConsultation from './Components/BookingConsultation/BookingConsultation';
 import Notification from './Components/Notification/Notification';
 import ReviewForm from './Components/ReviewForm/ReviewForm';
+import ProfileCard from './Components/ProfileCard/ProfileCard';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
             />
             <Route path="/book-consultation" element={<BookingConsultation />} />
             <Route path="/reviews" element={<ReviewForm />} />
+            <Route path="/profile" element={<ProfileCard />} />
             </Routes>
         </Notification>
       </BrowserRouter>

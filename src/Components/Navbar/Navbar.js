@@ -77,12 +77,17 @@ const Navbar = () => {
         </li>
         {isLoggedIn ? (
         <>
-            <li className="link">
-            <span style={{ marginRight: '10px', fontWeight: '500' }}>
+            <li className="link welcome-user">
+            <span>
                 Welcome, {username.split('@')[0]}
             </span>
+            <ul className="dropdown-menu">
+                <li>
+                <Link to="/profile">Your Profile</Link>
+                </li>
+            </ul>
             </li>
-            <li className="link">
+            <li className="link profile-logout">
             <button className="btn2" onClick={handleLogout}>
                 Logout
             </button>
