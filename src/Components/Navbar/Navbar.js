@@ -82,9 +82,8 @@ const Navbar = () => {
                 Welcome, {username.split('@')[0]}
             </span>
             <ul className="dropdown-menu">
-                <li>
-                <Link to="/profile">Your Profile</Link>
-                </li>
+                <li><Link to="/profile">Your Profile</Link></li>
+                <li><Link to="/reports">Your Reports</Link></li>
             </ul>
             </li>
             <li className="link profile-logout">
